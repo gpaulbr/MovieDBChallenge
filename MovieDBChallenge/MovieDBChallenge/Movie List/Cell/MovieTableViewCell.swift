@@ -21,6 +21,7 @@ class MovieTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
     }
     
     func configure(with viewModel: MovieCellViewModel) {
