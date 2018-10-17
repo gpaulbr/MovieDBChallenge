@@ -25,7 +25,10 @@ class MovieDetailsViewModel {
     }
     
     var imageUrl: String {
-        return "http://image.tmdb.org/t/p/w780\(movie.backdropPath!)"
+        guard let path = movie.backdropPath else {
+            return "https://www.rvroundtable.com/wp-content/uploads/revslider/home5/placeholder-1200x500.png"
+        }
+        return "http://image.tmdb.org/t/p/w780\(path)"
     }
     
     var overview: String {

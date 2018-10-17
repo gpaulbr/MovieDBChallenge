@@ -30,6 +30,7 @@ class MovieTableViewCell: UITableViewCell {
         genreLabel.text = viewModel.genre
         releaseDateLabel.text = viewModel.releaseDate
         
-        posterImage.dowloadFromServer(link: viewModel.imageUrl)
+        posterImage.dowloadFromServer(link: viewModel.imageUrl, contentMode: .scaleAspectFill)
+        posterImage.clipsToBounds = true
     }
 }
