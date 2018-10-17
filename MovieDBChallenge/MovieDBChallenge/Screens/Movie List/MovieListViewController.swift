@@ -55,7 +55,9 @@ extension MovieListViewController: UITableViewDataSource {
 }
 
 extension MovieListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.movieList(self, didClick: viewModel.movie(for: indexPath))
+    }
 }
 
 extension MovieListViewController: MovieListViewModelUIDelegate {
