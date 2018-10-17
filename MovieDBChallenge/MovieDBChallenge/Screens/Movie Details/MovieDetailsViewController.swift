@@ -27,7 +27,8 @@ class MovieDetailsViewController: UIViewController {
         dateLabel.text = viewModel.date
         overviewTextView.text = viewModel.overview
         
-        backdropImage.dowloadFromServer(link: viewModel.imageUrl)
+        backdropImage.dowloadFromServer(link: viewModel.imageUrl, contentMode: .scaleAspectFill)
+        backdropImage.clipsToBounds = true
     }
 
 }
