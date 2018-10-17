@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol MovieListDelegate: class {
+    func movieList(_ movieListViewController: MovieListViewController, didClick movie: Movie)
+}
+
 class MovieListViewController: UIViewController {
 
     @IBOutlet weak var moviesTableView: UITableView!
     
     var viewModel: MovieListViewModel!
+    weak var delegate: MovieListDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +55,9 @@ extension MovieListViewController: UITableViewDataSource {
 }
 
 extension MovieListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.movieList(self, didClick: viewModel.movie(for: indexPath))
+    }
 }
 
 extension MovieListViewController: MovieListViewModelUIDelegate {

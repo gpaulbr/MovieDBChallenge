@@ -6,7 +6,6 @@
 //  Copyright © 2018 gp. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class MovieListCoordinator: Coordinator {
@@ -25,8 +24,23 @@ class MovieListCoordinator: Coordinator {
         let movieListViewController = MovieListViewController.instantiate()
         let movieListViewModel = MovieListViewModel()
         movieListViewController.viewModel = movieListViewModel
+        movieListViewController.delegate = self
         
         self.movieListViewController = movieListViewController
         presenter.pushViewController(movieListViewController, animated: false)
+    }
+    
+    fileprivate func showMovieDetails(movie: Movie) {
+        let movieDetailsCoordinator =
+            MovieDetailsCoordinator(presenter: presenter, movie: movie)
+        
+        addChild(coordinator: movieDetailsCoordinator)
+        movieDetailsCoordinator.start()
+    }
+}
+
+extension MovieListCoordinator: MovieListDelegate {
+    func movieList(_ movieListViewController: MovieListViewController, didClick movie: Movie) {
+        showMovieDetails(movie: movie)
     }
 }
