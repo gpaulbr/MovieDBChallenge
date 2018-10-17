@@ -47,4 +47,37 @@ public class APIManager {
             }
         }.resume()
     }
+    
+    func getGenres(completion: @escaping ((Genres) -> Void)) {
+        
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.themoviedb.org"
+        urlComponents.path = "/3/genre/movie/list"
+        
+        let apiKey = URLQueryItem(name: "api_key", value: "c5850ed73901b8d268d0898a8a9d8bff")
+        
+        urlComponents.queryItems = [apiKey]
+        
+        guard let url = urlComponents.url else { fatalError("Could not create URL from components") }
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
+        _ = session.dataTask(with: url) { (responseData, response, responseError) in
+            DispatchQueue.main.async {
+                if let error = responseError {
+                    print(error)
+                } else if let jsonData = responseData {
+                    do {
+                        let decoder = JSONDecoder()
+                        let genres: Genres = try decoder.decode(Genres.self, from: jsonData)
+                        completion(genres)
+                    } catch let jsonError {
+                        print(responseError ?? "response data unable to generate a genre list \(jsonError)")
+                    }
+                }
+            }
+        }.resume()
+    }
 }

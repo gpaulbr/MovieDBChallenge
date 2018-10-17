@@ -14,12 +14,16 @@ class MovieCellViewModel {
     
     var title: String { return movie.title }
     
-    //TODO: Genre
     var genre: String {
-        guard let id = movie.genreIds.first else {
-            return "1"
+        var string = ""
+        movie.genreIds.forEach { (id) in
+            if let element = GenresSingleton.shared.genres.first(where: {
+                $0.id == id }) {
+                    string.append(element.name)
+                    string.append(" ")
+            }
         }
-        return String(id)
+        return string
     }
     
     var releaseDate: String {
