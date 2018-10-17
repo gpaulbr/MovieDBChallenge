@@ -13,8 +13,18 @@ class MovieDetailsViewModel {
     private var movie: Movie
     
     var name: String { return movie.title }
-    //TODO: genre
-    var genre: String { return String(movie.genreIds.first!) }
+    
+    var genre: String {
+        var string = ""
+        movie.genreIds.forEach { (id) in
+            if let element = GenresSingleton.shared.genres.first(where: {
+                $0.id == id }) {
+                string.append(element.name)
+                string.append(" ")
+            }
+        }
+        return string
+    }
     
     var date: String {
         let dateFormatter = DateFormatter()

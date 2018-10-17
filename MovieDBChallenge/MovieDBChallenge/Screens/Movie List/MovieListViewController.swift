@@ -50,8 +50,6 @@ extension MovieListViewController: UITableViewDataSource {
         cell.configure(with: movieCellViewModel)
         return cell
     }
-    
-    
 }
 
 extension MovieListViewController: UITableViewDelegate {

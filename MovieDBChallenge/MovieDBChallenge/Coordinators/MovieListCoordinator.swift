@@ -18,6 +18,9 @@ class MovieListCoordinator: Coordinator {
     init (presenter: UINavigationController) {
         self.presenter = presenter
         self.childrenCoordinators = []
+        APIManager.shared.getGenres { (querry) in
+            GenresSingleton.shared.genres = querry.genres
+        }
     }
     
     func start() {
