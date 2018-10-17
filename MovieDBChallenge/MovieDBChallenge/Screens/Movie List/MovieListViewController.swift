@@ -58,6 +58,12 @@ extension MovieListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.movieList(self, didClick: viewModel.movie(for: indexPath))
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if (indexPath.row + 1) == tableView.numberOfRows(inSection: 0) {
+            viewModel.getMoreMovies()
+        }
+    }
 }
 
 extension MovieListViewController: MovieListViewModelUIDelegate {

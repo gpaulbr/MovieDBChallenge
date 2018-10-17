@@ -13,7 +13,9 @@ protocol MovieListViewModelUIDelegate: class {
 }
 
 class MovieListViewModel {
-    private var movies: [Movie]
+    private var movies: [Movie] = []
+    private var pageNumber = 1
+    private var pageNumberMax = 20
     
     weak var UIDelegate: MovieListViewModelUIDelegate?
     
@@ -22,12 +24,16 @@ class MovieListViewModel {
     }
     
     init() {
-        movies = []
-        APIManager.shared.getUpcomingMovies(pageNumber: 1, completion: { (moviesQuerry) in
-            self.movies = moviesQuerry
-            print(self.movies)
+        getMoreMovies()
+    }
+    
+    func getMoreMovies() {
+        guard pageNumber <= pageNumberMax else { return }
+        APIManager.shared.getUpcomingMovies(pageNumber: pageNumber, completion: { (moviesQuerry) in
+            self.movies.append(contentsOf: moviesQuerry)
             self.UIDelegate?.movieListViewModelDidUpdate(self)
         })
+        pageNumber += 1
     }
     
     func movie(for indexPath: IndexPath) -> Movie {
