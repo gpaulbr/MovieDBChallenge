@@ -43,6 +43,4 @@ extension MovieListCoordinator: MovieListDelegate {
     func movieList(_ movieListViewController: MovieListViewController, didClick movie: Movie) {
         showMovieDetails(movie: movie)
     }
-    
-    
 }

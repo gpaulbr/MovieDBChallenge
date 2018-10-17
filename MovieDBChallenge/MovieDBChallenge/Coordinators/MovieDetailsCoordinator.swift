@@ -14,6 +14,7 @@ class MovieDetailsCoordinator: Coordinator {
     var childrenCoordinators: [Coordinator]
     
     fileprivate let movie: Movie
+    fileprivate var movieDetailsViewController: MovieDetailsViewController?
     
     init(presenter: UINavigationController, movie: Movie) {
         self.presenter = presenter
@@ -22,6 +23,11 @@ class MovieDetailsCoordinator: Coordinator {
     }
     
     func start() {
+        let movieDetailsViewController = MovieDetailsViewController.instantiate()
+        let movieDetailsViewModel = MovieDetailsViewModel(movie: movie)
+        movieDetailsViewController.viewModel = movieDetailsViewModel
         
+        self.movieDetailsViewController = movieDetailsViewController
+        presenter.pushViewController(movieDetailsViewController, animated: true)
     }
 }

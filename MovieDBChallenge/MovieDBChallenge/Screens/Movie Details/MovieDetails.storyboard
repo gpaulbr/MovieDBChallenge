@@ -12,7 +12,7 @@
         <!--Movie Details View Controller-->
         <scene sceneID="pRx-Sl-Ryc">
             <objects>
-                <viewController id="IzD-GB-4Ul" customClass="MovieDetailsViewController" customModule="MovieDBChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetailsViewController" id="IzD-GB-4Ul" customClass="MovieDetailsViewController" customModule="MovieDBChallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ggd-Dy-3v3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
